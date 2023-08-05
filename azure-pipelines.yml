@@ -1,17 +1,36 @@
-# HTML
-# Archive your static HTML project and save it with the build record.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Nombre del flujo de trabajo
+name: CompilacionWeb
 
+# Gatillo: Se ejecutará cuando haya cambios en la rama 'main'
 trigger:
-- master
+- main
 
-pool:
-  vmImage: ubuntu-latest
+# Definición de los pasos
+jobs:
+- job: Compilacion
+  displayName: Compilación y Empaquetado del Sitio Web
+  pool:
+    vmImage: 'ubuntu-latest'
 
-steps:
-- task: ArchiveFiles@2
+  steps:
+  - checkout: self
+
+  - script: |
+      echo Compilando el sitio web...
+      # Agregar aquí los comandos para compilar el sitio web si es necesario
+    displayName: Compilación
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/sitio-web.zip'
+      replaceExistingArchive: true
+    displayName: Empaquetado
+
+# Publicar el artefacto del sitio web
+- task: PublishPipelineArtifact@1
   inputs:
-    rootFolderOrFile: '$(build.sourcesDirectory)'
-    includeRootFolder: false
-- task: PublishBuildArtifacts@1
+    targetPath: '$(Build.ArtifactStagingDirectory)/sitio-web.zip'
+    artifact: 'sitio-web-artifact'
