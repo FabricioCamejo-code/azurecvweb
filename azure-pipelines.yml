@@ -1,4 +1,11 @@
 # Nombre del flujo de trabajo
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Suscripción de Azure 1 (8d0335de-edca-4d9d-a54d-581aa8c5a17e)'
+    appType: 'webApp'
+    WebAppName: 'alexisfabricio'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 name: CompilacionWeb
 
 # Gatillo: Se ejecutará cuando haya cambios en la rama 'main'
