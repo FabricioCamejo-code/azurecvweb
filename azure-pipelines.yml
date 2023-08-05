@@ -29,10 +29,9 @@ jobs:
       replaceExistingArchive: true
     displayName: Empaquetado
 
+  - task: PublishPipelineArtifact@1
+    inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/sitio-web.zip'
+        artifact: 'sitio-web-artifact'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)/sitio-web.zip'
-    artifact: 'sitio-web-artifact'
-    publishLocation: 'pipeline'
 
