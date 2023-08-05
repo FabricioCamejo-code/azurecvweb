@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# Nombre del flujo de trabajo
+<<<<<<< HEAD 
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
